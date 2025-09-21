@@ -33,6 +33,7 @@ class DebitCard extends Authenticatable
         'type',
         'expiration_date',
         'disabled_at',
+        'is_active',
     ];
 
     /**
@@ -52,7 +53,6 @@ class DebitCard extends Authenticatable
     protected $casts = [
         'disabled_at' => 'datetime:Y-m-d H:i:s',
     ];
-
 
     /**
      * A Debit Card belongs to a user

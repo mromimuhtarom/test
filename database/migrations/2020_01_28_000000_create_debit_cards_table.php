@@ -14,11 +14,13 @@ class CreateDebitCardsTable extends Migration
     public function up()
     {
         Schema::create('debit_cards', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('number');
+            $table->unsignedBigInteger('user_id');
+             $table->string('number', 20)->unique();
             $table->string('type');
             $table->dateTime('expiration_date');
+            $table->boolean('is_active')->default(true);
             $table->dateTime('disabled_at')->nullable()->index();
 
             $table->timestamps();

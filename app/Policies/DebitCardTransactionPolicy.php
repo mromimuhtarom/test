@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Polocies;
+namespace App\Policies;
 
 use App\Models\DebitCard;
 use App\Models\DebitCardTransaction;
@@ -13,6 +13,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class DebitCardTransactionPolicy
 {
     use HandlesAuthorization;
+    
 
     /**
      * View a Debit Transaction
@@ -22,8 +23,11 @@ class DebitCardTransactionPolicy
      *
      * @return bool
      */
-    public function view(User $user, DebitCardTransaction $debitCardTransaction): bool
+    public function view(User $user, ?DebitCardTransaction $debitCardTransaction = null): bool
     {
+        if (!$debitCardTransaction) {
+            return true;
+        }
         return $user->is($debitCardTransaction->debitCard->user);
     }
 
